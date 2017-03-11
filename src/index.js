@@ -48,7 +48,6 @@ export default () => {
   addRoutes(router, container);
   app.use(router.allowedMethods());
   app.use(router.routes());
-  app.use(rollbar.errorHandler('1083e299dc68458588ebf6b51746b5e7'));
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     debug: true,
@@ -62,5 +61,7 @@ export default () => {
     ],
   });
   pug.use(app);
+  rollbar.init('1083e299dc68458588ebf6b51746b5e7');
+  app.on('error', (err, ctx) => rollbar.reportMessage(err.message, ctx));
   return app;
 };

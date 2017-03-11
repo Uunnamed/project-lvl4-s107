@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/Uunnamed/project-lvl4-s107#readme",
   "dependencies": {
+    "autoprefixer": "^6.7.6",
     "babel-cli": "*",
     "babel-core": "*",
     "babel-loader": "*",
@@ -45,6 +46,7 @@
     "css-loader": "*",
     "debug": "*",
     "dotenv": "^4.0.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "gulp": "*",
     "gulp-util": "*",
     "jquery": "^3.1.1",
@@ -61,6 +63,8 @@
     "koa-webpack": "^0.3.1",
     "lodash": "*",
     "pg": "^6.1.2",
+    "postcss-loader": "^1.3.3",
+    "precss": "^1.4.0",
     "rollbar": "^0.6.3",
     "sequelize": "*",
     "sqlite3": "*",
@@ -69,14 +73,27 @@
     "webpack": "*"
   },
   "devDependencies": {
+    "autoprefixer": "^6.7.6",
     "babel-eslint": "*",
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.27.1",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-flowtype": "*",
     "eslint-plugin-import": "*",
+    "exports-loader": "^0.6.4",
+    "file-loader": "^0.10.1",
     "flow-bin": "^0.37",
     "flow-typed": "*",
+    "imports-loader": "^0.7.1",
     "jest": "^18",
-    "nodemon": "*"
+    "node-sass": "^4.5.0",
+    "nodemon": "*",
+    "postcss-loader": "^1.3.3",
+    "precss": "^1.4.0",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "url-loader": "^0.5.8"
   }
 }

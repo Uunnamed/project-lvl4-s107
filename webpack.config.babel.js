@@ -37,18 +37,8 @@ export default () => ({
         }),
       },
       {
-        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: 'url-loader?limit=10000',
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+        test: /\.(ttf|eot|svg|woff2)(\?[\s\S]+)?$/,
         use: 'file-loader',
-      },
-
-      // Bootstrap 4
-      {
-        test: /bootstrap\/dist\/js\/umd\//,
-        use: 'imports-loader?jQuery=jquery',
       },
     ],
   },

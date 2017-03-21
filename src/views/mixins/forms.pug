@@ -12,6 +12,17 @@ mixin input(f, property, options = { as: 'text' })
     if f.errors[property]
       .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
+mixin select(f, property, list)
+  - const value = f.object[property] === undefined ? 1 : f.object[property]
+  .form-group
+    label= property
+    select(name=getInputName(f, property) class='form-control')
+      each elem in f.object[list]
+        if elem.id === value
+          option(selected value=`${elem.id}`) #{elem.name}
+        else
+          option(value=`${elem.id}`) #{elem.name}
+
 mixin button(f, type = 'submit')
   .form-group
     input(class='btn btn-primary-outline btn-outline-success' type=`${type}` value=`Save`)

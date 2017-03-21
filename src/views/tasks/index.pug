@@ -1,0 +1,31 @@
+extends /layouts/application.pug
+
+block content
+  br
+  div
+    a(href=urlFor('newTask'))
+      button(class='btn btn-primary-outline btn-outline-success') Новая задача
+  br
+  table.table.table-stripped
+    thead
+      tr
+        th id
+        th Заголовок
+        th Описание
+        th Автор
+        th Исполнитель
+        th Статус
+        th Действия
+    tbody
+      each task in tasks
+        tr
+          td= task.id
+          td= task.name
+          td= task.description
+          td= task.creator
+          td= task.assignedTo
+          td= task.status
+          td
+            a(class="fa fa-pencil-square-o fa-lg" style="padding:5px;" aria-hidden="true" href=urlFor('editTask', task.id))
+            a(class="fa fa-eye fa-lg" style="padding:5px;" aria-hidden="true" href='#')
+            a(class="fa fa-trash-o fa-lg" style="padding:5px;" aria-hidden="true" href='#')

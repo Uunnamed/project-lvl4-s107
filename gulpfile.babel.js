@@ -5,6 +5,7 @@ import gutil from 'gulp-util';
 import repl from 'repl';
 import container from './src/container';
 import init from './src/init';
+import defaultData from './src/db/defaultdata';
 import getServer from './src';
 
 // gulp.task('default', console.log('hello!'));
@@ -23,6 +24,17 @@ gulp.task('console', () => {
 gulp.task('init', async () => {
   await init();
   console.log('db was created');
+});
+
+gulp.task('drop', async () => {
+  await Promise.all(Object.keys(container).slice(1).map(key => container[key].drop()));
+  console.log('Tables was droped');
+});
+
+gulp.task('defload', async () => {
+  await Promise.all(defaultData.users.map(user => container.User.create(user)));
+  await Promise.all(defaultData.statuses.map(status => container.TaskStatus.create(status)));
+  console.log('Data was loaded');
 });
 
 gulp.task('server', (cb) => {

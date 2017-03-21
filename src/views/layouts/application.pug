@@ -16,6 +16,9 @@ html(lang="en")
         ul.navbar-nav.mr-auto
           li.nav-item.active
             a.nav-link(href=urlFor('users')) Users
+          if isSignedIn()
+            li.nav-item
+              a.nav-link(href=urlFor('tasks')) Tasks
         ul.navbar-nav
           if isSignedIn()
             li.nav-item

@@ -1,0 +1,11 @@
+extends /layouts/application.pug
+
+block content
+  h1 New Task
+  +formFor(f, { url: urlFor('tasks'), method: 'post' })
+    +input(f, 'name')
+    +select(f, 'status', 'statuses')
+    +input(f, 'description')
+    +select(f, 'creator', 'users')
+    +select(f, 'assignedTo', 'users')
+    +button(f)

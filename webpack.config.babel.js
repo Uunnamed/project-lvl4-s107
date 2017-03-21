@@ -5,7 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 export default () => ({
   entry: {
     app: ['./client'],
-    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'tether'],
+    vendor: ['babel-polyfill', 'jquery', 'jquery-ujs', 'tether', 'bootstrap'],
   },
   output: {
     path: path.join(__dirname, 'public', 'assets'),
@@ -37,7 +37,11 @@ export default () => ({
         }),
       },
       {
-        test: /\.(ttf|eot|svg|woff2)(\?[\s\S]+)?$/,
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        use: 'file-loader',
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
         use: 'file-loader',
       },
     ],
@@ -48,7 +52,7 @@ export default () => ({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Tether: "tether",
+      Tether: 'tether',
       'window.Tether': 'tether',
     }),
     new webpack.optimize.CommonsChunkPlugin({

@@ -62,6 +62,9 @@ export default () => {
   });
   pug.use(app);
   rollbar.init('1083e299dc68458588ebf6b51746b5e7');
-  app.on('error', (err, ctx) => rollbar.reportMessage(err.message, ctx));
+  app.on('error', (err, ctx) => {
+    rollbar.reportMessage(err.message, ctx);
+    console.log(err);
+  });
   return app;
 };

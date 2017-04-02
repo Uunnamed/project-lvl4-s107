@@ -1,1 +1,64 @@
 extends /layouts/application.pug
+block content
+  br
+  h3 Task № #{f.object.id} : #{f.object.name}
+  br
+  div.row
+    div.col-md-10
+      h4
+        u Creator: #{f.object.creatorName}
+    div.col-md-2
+      +formFor(f, { url: urlFor('deleteTask', f.object.id), method: 'POST'})
+        .form-group
+          input.form-control(hidden name='_method' value='DELETE')
+        .form-group
+          input(class="btn btn-primary-outline btn btn-danger" type="submit" value="Delete task")
+  table.table
+    tbody
+      tr
+        th Status
+        td= f.object.statusName
+        th
+          +formFor(f, { url: urlFor('updateTask', f.object.id), method: 'POST', class: "form-inline" })
+            .form-group
+              input.form-control(hidden name='_method' value='PATCH')
+            +select(f, 'status', 'statuses', { style: 'padding:5px;' })
+            +button(f)
+      tr
+        th AssignedTo
+        td= f.object.assignedToName
+        th
+          +formFor(f, { url: urlFor('updateTask', f.object.id), method: 'POST', class: "form-inline" })
+            .form-group
+              input.form-control(hidden name='_method' value='PATCH')
+            +select(f, 'assignedTo', 'users', { style: 'padding:5px;' })
+            +button(f)
+      tr
+        th Tags
+        td
+          each tag in f.object.tags
+            a(href=`${urlFor('tasks')}?tag=${tag.id}` style='padding:10px;')= `#${tag.name}`
+      tr
+        th Description
+  p.col-md-7= f.object.description
+  br
+  h4
+    u Comments
+  br
+  table
+    tbody
+      each comment in f.object.comments
+        tr
+          th= `${comment.creator} in ${comment.date}`
+        tr
+          td= comment.text
+  br
+  +formFor(f, { url: urlFor('comments', f.object.id), method: 'POST'})
+    .form-group
+      input.form-control(hidden name='comment[creator]' value=getUserId())
+    .form-group
+      input.form-control(hidden name='comment[TaskId]' value=f.object.id)
+    .form-group
+      label Your comment
+      input.form-control(name='comment[text]')
+    +button(f, 'submit', { value: 'Add' })

@@ -30,5 +30,8 @@ export default connect => connect.define('Task', {
     field: 'assignedTo_id',
     allowNull: false,
   },
-  // freezeTableName: true, // Model tableName will be the same as the model name
-});
+},
+  {
+    freezeTableName: true,
+  },
+);

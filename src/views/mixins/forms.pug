@@ -1,7 +1,7 @@
 - const getInputName = (f, property) => `${f.name}[${property}]`
 
-mixin formFor(f, options = {})
-  form(action=_.get(options, 'url') method=_.get(options, 'method', 'get'))
+mixin formFor(f, options = { class: '' })
+  form(action=_.get(options, 'url') method=_.get(options, 'method', 'get') class=options['class'])
     block
 
 mixin input(f, property, options = { as: 'text' })
@@ -12,10 +12,10 @@ mixin input(f, property, options = { as: 'text' })
     if f.errors[property]
       .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin select(f, property, list)
+mixin select(f, property, list, options = { label: '', style: ''})
   - const value = f.object[property] === undefined ? 1 : f.object[property]
-  .form-group
-    label= property
+  .form-group(style=options.style)
+    label(style=options.style)= options.label
     select(name=getInputName(f, property) class='form-control')
       each elem in f.object[list]
         if elem.id === value
@@ -23,6 +23,14 @@ mixin select(f, property, list)
         else
           option(value=`${elem.id}`) #{elem.name}
 
-mixin button(f, type = 'submit')
+mixin filterSelect(name, list, options = { label: '', style: ''})
+  .form-group(style=options.style)
+    label(style=options.style)= options.label
+    select(name= name class='form-control')
+      option(disabled selected) Choose value
+      each elem in list
+        option(value=`${elem.id}`) #{elem.name}
+
+mixin button(f, type = 'submit', options = { value: 'Save' })
   .form-group
-    input(class='btn btn-primary-outline btn-outline-success' type=`${type}` value=`Save`)
+    input(class='btn btn-primary-outline btn-outline-success' type=`${type}` value=options.value)

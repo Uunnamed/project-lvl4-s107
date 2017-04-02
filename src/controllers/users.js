@@ -20,5 +20,16 @@ export default (router, { User }) => {
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
+    })
+    .delete('delete', '/user/:id', async (ctx) => {
+      const id = ctx.params.id;
+      try {
+        await User.destroy({ where: { id } });
+        ctx.flash.set('User has been deleted');
+        ctx.redirect(router.url('users'));
+      } catch (e) {
+        ctx.flash.set('User not found');
+        ctx.redirect(router.url('users'));
+      }
     });
 };

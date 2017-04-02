@@ -5,9 +5,11 @@ block content
   +formFor(f, { url: urlFor('updateTask', f.object.id), method: 'POST' })
     div.form-group
       input.form-control(hidden name='_method' value='PUT')
-    +input(f, 'name')
-    +select(f, 'status', 'statuses')
+    +input(f, 'name', { label: 'Name'})
     +input(f, 'description')
-    +select(f, 'creator', 'users')
+    +input(f, 'tags')
+    +select(f, 'status', 'statuses', { label: 'Status' })
+    div.form-group
+      input.form-control(hidden name='form[creator]' value=f.object.creator)
     +select(f, 'assignedTo', 'users')
     +button(f)

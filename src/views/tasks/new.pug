@@ -6,6 +6,8 @@ block content
     +input(f, 'name')
     +select(f, 'status', 'statuses')
     +input(f, 'description')
-    +select(f, 'creator', 'users')
+    +input(f, 'tags')
+    div.form-group
+      input.form-control(hidden name='form[creator]' value=getUserId())
     +select(f, 'assignedTo', 'users')
     +button(f)

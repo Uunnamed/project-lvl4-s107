@@ -39,6 +39,9 @@ export default connect => connect.define('User', {
     fullName: function fullName() {
       return `${this.firstName} ${this.lastName}`;
     },
+    toMap: function toMap() {
+      return { id: this.id, name: this.fullName };
+    },
   },
   freezeTableName: true, // Model tableName will be the same as the model name
 });

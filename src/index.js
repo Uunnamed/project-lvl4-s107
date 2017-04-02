@@ -29,6 +29,7 @@ export default () => {
     ctx.state = {
       flash: ctx.flash,
       isSignedIn: () => ctx.session.userId !== undefined,
+      getUserId: () => ctx.session.userId,
     };
     await next();
   });
@@ -42,12 +43,17 @@ export default () => {
   app.use(middleware({
     config: getWebpackConfig(),
   }));
-
   app.use(koaLogger());
   const router = new Router();
   addRoutes(router, container);
   app.use(router.allowedMethods());
   app.use(router.routes());
+  app.use((ctx) => {
+    if (ctx.status !== 404) {
+      return;
+    }
+    ctx.redirect('/404');
+  });
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     debug: true,

@@ -6,5 +6,13 @@ export default connect => connect.define('TaskStatus', {
     unique: true,
     allowNull: false,
   },
-  // freezeTableName: true,
-});
+},
+  {
+    getterMethods: {
+      toMap: function toMap() {
+        return { id: this.id, name: this.name };
+      },
+    },
+    freezeTableName: true,
+  },
+);

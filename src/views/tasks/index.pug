@@ -2,9 +2,17 @@ extends /layouts/application.pug
 
 block content
   br
+  form(action=urlFor('tasks') method='get' class="form-inline")
+    select.form-control(name='userRole')
+      option(selected value="assignedTo") assignedTo
+      option(value="creator") creator
+    +filterSelect('userId', users, {label: 'User', style: 'padding:5px;'})
+    +filterSelect('status', statuses, {label: 'Status', style: 'padding:5px;'})
+    +button({}, 'submit', { value: 'Filter'})
+  br
   div
     a(href=urlFor('newTask'))
-      button(class='btn btn-primary-outline btn-outline-success') Новая задача
+      button(class='btn btn-primary-outline btn-outline-success') New Task
   br
   table.table.table-stripped
     thead
@@ -27,5 +35,4 @@ block content
           td= task.status
           td
             a(class="fa fa-pencil-square-o fa-lg" style="padding:5px;" aria-hidden="true" href=urlFor('editTask', task.id))
-            a(class="fa fa-eye fa-lg" style="padding:5px;" aria-hidden="true" href='#')
-            a(class="fa fa-trash-o fa-lg" style="padding:5px;" aria-hidden="true" href='#')
+            a(class="fa fa-eye fa-lg" style="padding:5px;" aria-hidden="true" href=urlFor('showTask', task.id))

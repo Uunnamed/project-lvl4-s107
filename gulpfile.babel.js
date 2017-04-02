@@ -34,6 +34,7 @@ gulp.task('drop', async () => {
 gulp.task('defload', async () => {
   await Promise.all(defaultData.users.map(user => container.User.create(user)));
   await Promise.all(defaultData.statuses.map(status => container.TaskStatus.create(status)));
+  await Promise.all(defaultData.tasks.map(task => container.Task.create(task)));
   console.log('Data was loaded');
 });
 

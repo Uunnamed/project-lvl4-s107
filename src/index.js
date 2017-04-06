@@ -15,9 +15,12 @@ import flash from 'koa-flash-simple';
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 import rollbar from 'rollbar';
+import dotenv from 'dotenv';
 import getWebpackConfig from '../webpack.config.babel';
 import addRoutes from './controllers';
 import container from './container';
+
+dotenv.config();
 
 export default () => {
   const app = new Koa();
@@ -67,7 +70,7 @@ export default () => {
     ],
   });
   pug.use(app);
-  rollbar.init('1083e299dc68458588ebf6b51746b5e7');
+  rollbar.init(process.env.ROLLBAR);
   app.on('error', (err, ctx) => {
     rollbar.reportMessage(err.message, ctx);
     console.log(err);

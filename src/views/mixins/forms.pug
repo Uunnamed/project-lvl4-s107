@@ -12,25 +12,29 @@ mixin input(f, property, options = { as: 'text' })
     if f.errors[property]
       .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin select(f, property, list, options = { label: '', style: ''})
-  - const value = f.object[property] === undefined ? 1 : f.object[property]
-  .form-group(style=options.style)
-    label(style=options.style)= options.label
+mixin select(f, property, list, options = { label: '', class: ''})
+  - const value = f.object[property]
+  .form-group(class=(f.errors[property] && 'has-danger'))
+    label(class=options.class)= options.label
     select(name=getInputName(f, property) class='form-control')
+      option(disabled selected) Choose value
       each elem in f.object[list]
         if elem.id === value
           option(selected value=`${elem.id}`) #{elem.name}
         else
           option(value=`${elem.id}`) #{elem.name}
+    if f.errors[property]
+      .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
 
-mixin filterSelect(name, list, options = { label: '', style: ''})
-  .form-group(style=options.style)
-    label(style=options.style)= options.label
-    select(name= name class='form-control')
+mixin filterSelect(name, list, options = { label: ''})
+  .form-group.px-2
+    label.px-2= options.label
+    select(name= name class='form-control px-2')
       option(disabled selected) Choose value
       each elem in list
         option(value=`${elem.id}`) #{elem.name}
 
-mixin button(f, type = 'submit', options = { value: 'Save' })
-  .form-group
-    input(class='btn btn-primary-outline btn-outline-success' type=`${type}` value=options.value)
+mixin button(f, type = 'submit', options = { value: 'Save', class: '' })
+  - const value = options.value || 'Save'
+  .form-group(class=options.class)
+    input(class='btn btn-primary-outline btn-outline-success' type=`${type}` value=value)

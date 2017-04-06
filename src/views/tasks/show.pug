@@ -22,8 +22,8 @@ block content
           +formFor(f, { url: urlFor('updateTask', f.object.id), method: 'POST', class: "form-inline" })
             .form-group
               input.form-control(hidden name='_method' value='PATCH')
-            +select(f, 'status', 'statuses', { style: 'padding:5px;' })
-            +button(f)
+            +select(f, 'status', 'statuses', { class: 'px-2' })
+            +button(f, 'submit', { class: 'px-2' })
       tr
         th AssignedTo
         td= f.object.assignedToName
@@ -31,8 +31,8 @@ block content
           +formFor(f, { url: urlFor('updateTask', f.object.id), method: 'POST', class: "form-inline" })
             .form-group
               input.form-control(hidden name='_method' value='PATCH')
-            +select(f, 'assignedTo', 'users', { style: 'padding:5px;' })
-            +button(f)
+            +select(f, 'assignedTo', 'users', { class: 'px-2' })
+            +button(f, 'submit', { class: 'px-2' })
       tr
         th Tags
         td
@@ -45,13 +45,13 @@ block content
   h4
     u Comments
   br
-  table
+  table.table-striped
     tbody
       each comment in f.object.comments
         tr
           th= `${comment.creator} in ${comment.date}`
         tr
-          td= comment.text
+          td(style='padding:10px;')= `${comment.text}`
   br
   +formFor(f, { url: urlFor('comments', f.object.id), method: 'POST'})
     .form-group

@@ -6,9 +6,10 @@ block content
     select.form-control(name='userRole')
       option(selected value="assignedTo") assignedTo
       option(value="creator") creator
-    +filterSelect('userId', users, {label: 'User', style: 'padding:5px;'})
-    +filterSelect('status', statuses, {label: 'Status', style: 'padding:5px;'})
-    +button({}, 'submit', { value: 'Filter'})
+    +filterSelect('userId', users, {label: 'User'})
+    +filterSelect('status', statuses, {label: 'Status'})
+    +filterSelect('tag', tags, {label: 'Tag'})
+    +button({}, 'submit', { value: 'Filter', class: 'px-2'})
   br
   div
     a(href=urlFor('newTask'))
@@ -34,5 +35,5 @@ block content
           td= task.assignedTo
           td= task.status
           td
-            a(class="fa fa-pencil-square-o fa-lg" style="padding:5px;" aria-hidden="true" href=urlFor('editTask', task.id))
-            a(class="fa fa-eye fa-lg" style="padding:5px;" aria-hidden="true" href=urlFor('showTask', task.id))
+            a(class="fa fa-pencil-square-o fa-lg px-1" aria-hidden="true" href=urlFor('editTask', task.id))
+            a(class="fa fa-eye fa-lg px-1" aria-hidden="true" href=urlFor('showTask', task.id))

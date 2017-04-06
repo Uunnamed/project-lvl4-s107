@@ -26,8 +26,8 @@ export default (router, { Task, User, TaskStatus, Comment, Tag }) => {
             assignedTo: task.assignedToUser.fullName,
             status: task.TaskStatus.name,
           })));
-      const [users, statuses] = await Promise.all([User, TaskStatus].map(getSelector));
-      ctx.render('tasks', { users, statuses, tasks });
+      const [users, statuses, tags] = await Promise.all([User, TaskStatus, Tag].map(getSelector));
+      ctx.render('tasks', { users, statuses, tasks, tags });
     })
     .get('newTask', '/tasks/new', async (ctx) => {
       const task = Task.build();

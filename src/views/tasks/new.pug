@@ -4,10 +4,10 @@ block content
   h1 New Task
   +formFor(f, { url: urlFor('tasks'), method: 'post' })
     +input(f, 'name')
-    +select(f, 'status', 'statuses')
+    +select(f, 'status', 'statuses', { label: 'status' })
     +input(f, 'description')
     +input(f, 'tags')
     div.form-group
       input.form-control(hidden name='form[creator]' value=getUserId())
-    +select(f, 'assignedTo', 'users')
+    +select(f, 'assignedTo', 'users', { label: 'assignedTo' })
     +button(f)
